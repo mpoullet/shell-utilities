@@ -33,14 +33,8 @@ __svn_info_str() {
 __svn_branch() {
     local url=
     if [ "$(__svn_info_str)" ]; then
-        url=$(svn info | awk '/URL:/ {print $2}')
-        if [[ $url =~ trunk ]]; then
-            echo trunk
-        elif [[ $url =~ /branches/ ]]; then
-            echo "$url" | sed -e 's#^.*/\(branches/.*\)/.*$#\1#'
-        elif [[ $url =~ /tags/ ]]; then
-            echo "$url" | sed -e 's#^.*/\(tags/.*\)/.*$#\1#'
-        fi
+        url=$(svn info | awk '/^Relative URL:/ {print $3}')
+        echo "$url" | sed -e 's#\^/##'
     fi
 }
 
