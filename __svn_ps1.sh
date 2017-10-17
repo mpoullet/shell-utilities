@@ -2,7 +2,7 @@
 
 set -e
 set -u
-set -x
+#set -x
 SVN_PS1_SHOWDIRTYSTATE=1
 
 ### SVN ###
@@ -34,7 +34,7 @@ __svn_branch() {
     local url=
     if [ "$(__svn_info_str)" ]; then
         url=$(svn info | awk '/^Relative URL:/ {print $3}')
-        echo "$url" | sed -e 's#\^/##'
+        echo "${url//\^\//}"
     fi
 }
 
