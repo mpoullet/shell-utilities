@@ -34,7 +34,7 @@ __svn_branch() {
     local url=
     if [ "$(__svn_info_str)" ]; then
         url=$(svn info | awk '/^Relative URL:/ {print $3}')
-        echo "${url//\^\//}"
+        echo "${url#^/}"
     fi
 }
 
