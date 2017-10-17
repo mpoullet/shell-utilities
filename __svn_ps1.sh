@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# Based on: https://gist.github.com/dtjm/538522
+
 set -e
 set -u
 #set -x
