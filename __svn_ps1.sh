@@ -33,10 +33,24 @@ __svn_info_str() {
 
 # Outputs the current trunk, branch, or tag
 __svn_branch() {
-    local url=
     if [ "$(__svn_info_str)" ]; then
-        url=$(svn info | awk '/^Relative URL:/ {print $3}')
-        echo "${url#^/}"
+        svn info | awk '/^Relative URL:/ {
+            relative_url = $3;
+
+            if ( match(relative_url, /\^\/(branches|tags)\/([^/]*)\/?.*/, parts) )
+            {
+                if ( parts[1] == "tags")
+                    prefix="t";
+                else
+                    prefix="b";
+
+                print prefix "/" parts[2];
+            }
+            else if ( relative_url ~ /trunk/ )
+            {
+                print "trunk";
+            }
+        }'
     fi
 }
 
