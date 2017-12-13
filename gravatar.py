@@ -6,6 +6,7 @@ import urllib.parse
 import hashlib
 import sys
 
+
 def main(argv):
     """Return the Gravatar URL associated with the passed email address."""
     if len(argv) != 2:
@@ -16,10 +17,12 @@ def main(argv):
     size = 80
 
     gravatar_url = "https://www.gravatar.com/avatar/"
-    gravatar_url += hashlib.md5(str(email.lower()).encode('utf-8')).hexdigest() + "?"
-    gravatar_url += urllib.parse.urlencode({'s':str(size)})
+    gravatar_url += hashlib.md5(str(email.lower()
+                                   ).encode('utf-8')).hexdigest() + "?"
+    gravatar_url += urllib.parse.urlencode({'s': str(size)})
 
     print(gravatar_url)
+
 
 if __name__ == "__main__":
     main(sys.argv)
