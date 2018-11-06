@@ -62,4 +62,4 @@ FILTER+='
     fi
 '
 
-git filter-branch --env-filter "${FILTER}" --tag-name-filter cat -- --branches --tags
+git filter-branch -f --env-filter "${FILTER}" --tag-name-filter cat -- --branches --tags
