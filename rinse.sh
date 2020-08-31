@@ -10,4 +10,8 @@ git submodule foreach --recursive git reset --hard
 git submodule update --init --recursive
 if [ -x "$(command -v hub)" ]; then
     hub sync
+else
+    git fetch
 fi
+git pull
+git submodule sync
