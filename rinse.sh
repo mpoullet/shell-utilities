@@ -3,15 +3,23 @@
 #set -x
 set -euo pipefail
 
+# Clean main repo
 git clean -xfd
+# Clean all submodules
 git submodule foreach --recursive git clean -xfd
+# Reset main repo
 git reset --hard
+# Reset all submodules
 git submodule foreach --recursive git reset --hard
-git submodule update --init --recursive
+# Sync main repo
 if [ -x "$(command -v hub)" ]; then
     hub sync
 else
     git fetch
 fi
-git pull
-git submodule sync
+# Sync all submodules
+git submodule sync --recursive
+# Update main repo
+git pull --ff-only
+# Update all submodules
+git submodule update --init --recursive
