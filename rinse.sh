@@ -15,7 +15,7 @@ git submodule foreach --recursive git reset --hard
 if [ -x "$(command -v hub)" ]; then
     hub sync
 else
-    git fetch
+    git fetch --prune
 fi
 # Sync all submodules
 git submodule sync --recursive
